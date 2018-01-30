@@ -1,18 +1,18 @@
-import { GluegunCommand } from "gluegun/dist/types/domain/command";
+import { Context } from "../context"
 
-const pr: GluegunCommand = {
+const pr = {
   name: "pr",
-  run: async context => {
-    const { parameters, template: { generate } } = context
+  run: async (context: Context) => {
+    // https://github.com/infinitered/gluegun/issues/340
+    const settings = await context.settings()
 
-    const name = parameters.first
+    if (!settings.user) {
+      console.log("Please log in with your GitHub credentials:")
+      await context.githubAuth()
+    }
 
-    await generate({
-      template: "model.js.ejs",
-      target: `models/${name}-model.js`,
-      props: { name },
-    })
+    // Do something
   },
 }
 
-export default pr
+module.exports = pr

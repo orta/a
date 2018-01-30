@@ -19,6 +19,8 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "application-config": "^1.0.1",
+    "ghauth": "^3.2.1",
     "gluegun": "next",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
